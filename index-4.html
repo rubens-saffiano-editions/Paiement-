@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Règlement — Rubens Saffiano</title>
+<meta name="theme-color" content="#F7F5F0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { 
+    --f: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    --fond: #F7F5F0;
+    --texte: #111;
+    --ligne: #d4cec4;
+  }
+  
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-weight: normal; }
+  
+  html, body {
+    background-color: var(--fond);
+    color: var(--texte);
+    font-family: var(--f);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    height: 100dvh; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* --- En-tête --- */
+  header.entete {
+    height: 52px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--fond);
+    z-index: 1000;
+    padding: 0 20px;
+    position: relative;
+  }
+  
+  .vague-gauche, .vague-droite {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ligne));
+    opacity: 0;
+    animation: fadeIn 1.5s ease 0.5s forwards;
+  }
+  .vague-gauche { margin-right: 15px; }
+  .vague-droite { background: linear-gradient(90deg, var(--ligne), transparent); margin-left: 15px; }
+
+  header.entete .marque {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--texte);
+    opacity: 0;
+    animation: fadeIn 1.5s ease 0.3s forwards;
+    white-space: nowrap;
+  }
+
+  header.entete::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background-color: #e3ded5;
+    animation: expandLine 1.5s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+  }
+
+  /* --- Animations --- */
+  @keyframes expandLine { to { width: 100%; } }
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .anim {
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .d-1 { animation-delay: 0.1s; }
+  .d-2 { animation-delay: 0.2s; }
+  .d-3 { animation-delay: 0.3s; }
+  .d-4 { animation-delay: 0.4s; }
+
+  /* --- Conteneur Flexbox --- */
+  main.conteneur {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 16px 24px 24px;
+    overflow-y: auto; 
+  }
+  
+  /* --- Titres de section --- */
+  .titre-section {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin: 20px 0 10px 0;
+    border-bottom: 1px solid #e3ded5;
+    padding-bottom: 6px;
+    color: var(--texte);
+  }
+  .titre-section:first-child { margin-top: 8px; }
+  
+  /* --- Champs --- */
+  .champ { 
+    margin-bottom: 16px; 
+    position: relative; 
+  }
+  
+  .champ input {
+    width: 100%;
+    font-family: var(--f) !important;
+    font-size: 15px !important;
+    font-weight: 300 !important;
+    color: var(--texte) !important;
+    border: 0;
+    border-bottom: 1px solid var(--ligne);
+    background: transparent;
+    padding: 12px 0 8px 0;
+    outline: none;
+    border-radius: 0;
+    appearance: none;
+    transition: border-color 0.3s ease;
+  }
+  .champ input:focus { border-bottom: 1px solid var(--texte); }
+  .champ input::placeholder { 
+    color: #888; 
+    font-family: var(--f) !important;
+    font-size: 15px !important;
+    font-weight: 300 !important;
+  }
+
+  /* --- Grille --- */
+  .grille { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    column-gap: 20px; 
+  }
+  
+  /* --- Bouton --- */
+  .bouton-wrapper {
+    margin-top: auto; 
+    padding-top: 20px;
+  }
+
+  .bouton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--texte);
+    color: var(--fond);
+    border: 1px solid var(--texte);
+    padding: 16px;
+    font-family: var(--f);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .bouton:hover { background: transparent; color: var(--texte); }
+  .bouton svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* --- Champ obligatoire non rempli --- */
+  .champ.manquant input { border-bottom: 1px solid var(--texte); }
+  .champ.manquant input::placeholder { color: var(--texte); }
+  .alerte {
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--texte);
+    text-align: center;
+    margin-bottom: 10px;
+    display: none;
+  }
+  .alerte.visible { display: block; }
+
+  /* --- Page paiement --- */
+  .intro { font-size: 13px; line-height: 1.6; color: #555; margin: 4px 0 6px; }
+  .moyen { padding: 14px 0 16px; border-bottom: 1px solid #e3ded5; }
+  .moyen:last-child { border-bottom: 0; }
+  .moyen-nom { font-size: 15px; font-weight: 500; letter-spacing: .02em; margin-bottom: 4px; }
+  .moyen-note { font-size: 12.5px; line-height: 1.55; color: #666; margin-bottom: 12px; }
+  .lien-paiement {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; padding: 13px; text-decoration: none;
+    border: 1px solid var(--texte); color: var(--texte);
+    font-size: 11px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+    transition: all .3s ease;
+  }
+  .lien-paiement:hover, .lien-paiement:active { background: var(--texte); color: var(--fond); }
+  .encadre { background: #efebe3; padding: 14px 16px; font-size: 12.5px; line-height: 1.6; color: #333; margin-top: 4px; }
+  .encadre strong { font-weight: 500; }
+  .champ select {
+    width: 100%; font-family: var(--f); font-size: 15px; font-weight: 300; color: var(--texte);
+    border: 0; border-bottom: 1px solid var(--ligne); background: transparent;
+    padding: 12px 0 8px 0; outline: none; border-radius: 0; appearance: none; -webkit-appearance: none;
+  }
+  .champ select:invalid { color: #888; }
+  .champ.manquant select { border-bottom: 1px solid var(--texte); }
+  .bouton.secondaire { background: transparent; color: var(--texte); }
+  .bouton.secondaire:hover { background: var(--texte); color: var(--fond); }
+</style>
+</head>
+<body>
+
+  <header class="entete">
+    <div class="vague-gauche"></div>
+    <span class="marque">RUBENS SAFFIANO</span>
+    <div class="vague-droite"></div>
+  </header>
+
+  <main class="conteneur">
+
+    <!-- Section 1 : Moyens de paiement -->
+    <div class="anim d-1">
+      <div class="titre-section">01. Règlement de votre commande</div>
+      <p class="intro">Choisissez le moyen de paiement qui vous convient. Le montant est celui confirmé avec notre conseiller.</p>
+
+      <div class="moyen">
+        <div class="moyen-nom">Revolut</div>
+        <div class="moyen-note">Paiement direct, sans inscription obligatoire.</div>
+        <a class="lien-paiement" href="https://revolut.me/rubenszia7" target="_blank" rel="noopener">Payer avec Revolut</a>
+      </div>
+
+      <div class="moyen">
+        <div class="moyen-nom">PayPal</div>
+        <div class="moyen-note">Paiement par compte PayPal ou par carte bancaire. Pour éviter toute erreur, vous pouvez nous envoyer une capture d'écran sur WhatsApp avant de confirmer le paiement.</div>
+        <a class="lien-paiement" href="https://paypal.me/Rsbpluxry?country.x=FR&amp;locale.x=fr_FR" target="_blank" rel="noopener">Payer avec PayPal</a>
+      </div>
+
+      <div class="moyen">
+        <div class="moyen-nom">Wero</div>
+        <div class="moyen-note">Indiquez le numéro de téléphone associé à votre banque : nous vous envoyons la demande de paiement, que vous validez depuis votre application bancaire.</div>
+        <div class="champ">
+          <input type="tel" id="wero-tel" placeholder="Numéro de téléphone (banque)" autocomplete="tel">
+        </div>
+        <div class="alerte" id="alerte-wero"></div>
+        <button type="button" class="bouton secondaire" id="envoyer-wero">Recevoir ma demande Wero</button>
+      </div>
+    </div>
+
+    <!-- Section 2 : Acompte -->
+    <div class="anim d-2">
+      <div class="titre-section">02. Paiement en deux fois — Île-de-France</div>
+      <div class="encadre">
+        Vous résidez en Île-de-France ? Réglez <strong>un acompte</strong> par QR code sur notre application partenaire, puis <strong>le solde en espèces</strong> lors du retrait de votre commande.<br>
+        Contactez-nous sur WhatsApp pour recevoir votre QR code.<br>
+        Le paiement en espèces est limité par la loi à 1&nbsp;000&nbsp;€.
+      </div>
+      <button type="button" class="bouton secondaire" id="envoyer-acompte" style="margin-top:14px">Recevoir mon QR code d'acompte</button>
+    </div>
+
+    <!-- Section 3 : Confirmation -->
+    <div class="anim d-3">
+      <div class="titre-section">03. Confirmer mon paiement</div>
+      <div class="grille">
+        <div class="champ">
+          <input type="text" id="nom" placeholder="Nom et prénom *" autocomplete="name" data-requis="Nom et prénom">
+        </div>
+        <div class="champ">
+          <input type="text" id="montant" placeholder="Montant réglé (€) *" inputmode="decimal" data-requis="Montant réglé">
+        </div>
+      </div>
+      <div class="champ">
+        <select id="type" required data-requis="Type de paiement">
+          <option value="" disabled selected>Paiement total ou acompte ? *</option>
+          <option>Paiement total</option>
+          <option>Acompte (solde en espèces au retrait)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="anim d-4 bouton-wrapper">
+      <div class="alerte" id="alerte"></div>
+      <button type="button" class="bouton" id="envoyer">
+        <svg viewBox="0 0 24 24"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.3 20.7l4.4-1.1A8.8 8.8 0 1 0 12 3.2Z"/><path d="M8.9 8.3c.2-.5.6-.6 1-.6l.6 1.6-.7.9c.6 1.4 1.7 2.5 3.1 3.1l.9-.7 1.6.6c0 .4-.1.8-.6 1-2.9.8-6.6-2.9-5.9-5.9Z"/></svg>
+        J'ai effectué mon paiement
+      </button>
+    </div>
+
+  </main>
+
+  <script>
+    var numWA = "33695772805";
+    function val(id){ return document.getElementById(id).value.trim(); }
+    function ouvrirWA(message){
+      window.open("https://wa.me/" + numWA + "?text=" + encodeURIComponent(message), "_blank", "noopener");
+    }
+
+    // Demande Wero
+    document.getElementById("envoyer-wero").addEventListener("click", function(){
+      var a = document.getElementById("alerte-wero");
+      var tel = val("wero-tel");
+      if (!tel) {
+        document.getElementById("wero-tel").parentNode.classList.add("manquant");
+        a.textContent = "Merci d'indiquer votre numéro de téléphone";
+        a.classList.add("visible");
+        return;
+      }
+      a.classList.remove("visible");
+      ouvrirWA("*RÈGLEMENT — RUBENS SAFFIANO*\n\nBonjour, je souhaite régler par *Wero*.\nMerci de m'envoyer la demande de paiement sur ce numéro : " + tel);
+    });
+    document.getElementById("wero-tel").addEventListener("input", function(){ this.parentNode.classList.remove("manquant"); });
+
+    // Demande de QR code d'acompte
+    document.getElementById("envoyer-acompte").addEventListener("click", function(){
+      ouvrirWA("*RÈGLEMENT — RUBENS SAFFIANO*\n\nBonjour, je réside en Île-de-France et je souhaite régler un acompte.\nPouvez-vous m'envoyer le QR code de paiement ?");
+    });
+
+    // Champs obligatoires de la confirmation
+    document.querySelectorAll("[data-requis]").forEach(function(el){
+      el.addEventListener("input", function(){ el.parentNode.classList.remove("manquant"); });
+      el.addEventListener("change", function(){ el.parentNode.classList.remove("manquant"); });
+    });
+
+    // Confirmation de paiement
+    document.getElementById("envoyer").addEventListener("click", function(){
+      var manquants = [];
+      document.querySelectorAll("[data-requis]").forEach(function(el){
+        var vide = el.value.trim() === "";
+        el.parentNode.classList.toggle("manquant", vide);
+        if (vide) manquants.push(el.getAttribute("data-requis"));
+      });
+      var alerte = document.getElementById("alerte");
+      if (manquants.length) {
+        alerte.textContent = "Merci de compléter : " + manquants.join(", ");
+        alerte.classList.add("visible");
+        return;
+      }
+      alerte.classList.remove("visible");
+      var montant = val("montant").replace(/\s*€\s*$/, "") + " €";
+      ouvrirWA(
+        "*RÈGLEMENT — RUBENS SAFFIANO*\n\n" +
+        "Bonjour, je viens d'effectuer mon paiement :\n\n" +
+        "• *Nom :* " + val("nom") + "\n" +
+        "• *Montant réglé :* " + montant + "\n" +
+        "• *Type :* " + val("type") + "\n\n" +
+        "Je vous joins la capture d'écran du paiement."
+      );
+    });
+  </script>
+
+</body>
+</html>
